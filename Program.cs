@@ -35,7 +35,7 @@ public class UdpFileClient
         UdpClient UdpClient = new UdpClient(tcpPort);
         IPEndPoint RemoteIpEndPoint = null;
         
-        Byte[] receiveBytes = new Byte[65536];
+        Byte[] receiveBytes = new Byte[0];
         try
         {
             
@@ -43,7 +43,7 @@ public class UdpFileClient
 
             // Получаем информацию о файле
             receiveBytes = UdpClient.Receive(ref RemoteIpEndPoint);
-            Console.WriteLine("----File information received ----");
+            Console.WriteLine("---- File information received ----");
 
             XmlSerializer fileSerializer = new XmlSerializer(typeof(FileDetails));
             MemoryStream stream1 = new MemoryStream();
@@ -55,7 +55,7 @@ public class UdpFileClient
             // Вызываем метод Deserialize
             fileDet = (FileDetails)fileSerializer.Deserialize(stream1);
             Console.WriteLine("---- Received a file of type ." + fileDet.FILETYPE +
-                " sized " + fileDet.FILESIZE.ToString() + " byte");
+                " sized " + fileDet.FILESIZE.ToString() + " byte ----");
 
             Console.WriteLine("---- Wait for the file ----");
 
